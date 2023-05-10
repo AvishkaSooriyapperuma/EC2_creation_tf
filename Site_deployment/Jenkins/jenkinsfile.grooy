@@ -2,11 +2,6 @@ def site_deployment_url = "git@github.com:AvishkaSooriyapperuma/Portfolio.git";
 def inframaintainance_repo = "git@github.com:AvishkaSooriyapperuma/EC2_creation_tf.git";
 
 pipeline {
-
-  /*
-   * Run everything on an existing agent configured with a label 'docker'.
-   * This agent will need docker, git and a jdk installed at a minimum.
-   */
   agent any
 
   // using the Timestamper plugin we can add timestamps to the console log
@@ -16,12 +11,10 @@ pipeline {
 
   environment {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
-    IMAGE = readMavenPom().getArtifactId()
-    VERSION = readMavenPom().getVersion()
     id_rsa_key = "/home/ec2-user/.ssh/idrsa.pub"
   }
-  parameters{
-    string(name: 'pipeline_branch', defaultValue: 'main', description: 'githubrepo branch')
+  parameters {
+    string(name: 'pipeline_branch', defaultValue: 'main', description: 'github repo branch');
   }
 
   stages {
@@ -30,7 +23,7 @@ pipeline {
             //git credentialsId: 'github', url:"https://github.com/AvishkaSooriyapperuma/EC2_creation_tf.git"
                 checkout([
                     $class: 'GitSCM',
-                    branches: [[name: ${params.pipeline_branch}]],
+                    branches: [[name: 'main']],
                     userRemoteConfigs: [[
                         url: 'git@github.com:AvishkaSooriyapperuma/EC2_creation_tf.git',
                         credentialsId: 'github'
