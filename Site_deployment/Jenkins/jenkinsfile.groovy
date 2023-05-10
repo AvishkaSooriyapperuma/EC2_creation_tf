@@ -24,7 +24,7 @@ pipeline {
           steps{
                 checkout([
                     $class: 'GitSCM',
-                    branches: [[name: {params.pipeline_branch}]],
+                    branches: [[name: 'main']],
                     userRemoteConfigs: [[
                         url: 'git@github.com:AvishkaSooriyapperuma/EC2_creation_tf.git',
                         credentialsId: 'github'
