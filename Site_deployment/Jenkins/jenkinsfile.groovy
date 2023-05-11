@@ -30,7 +30,7 @@ pipeline {
                         credentialsId: 'github_ssh'
                     ]]
                 ])
-          }
+          }     
           }
   }
 
