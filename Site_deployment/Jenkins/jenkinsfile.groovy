@@ -41,9 +41,9 @@ pipeline {
     stage('initialize and plan terraform') {
         steps{
           script{
-            sh "pwd;cd ${work_space}/terraform/;terraform init ."
-            sh "pwd;cd terraform/;terraform plan -out tfplan"  
-            sh "pwd;cd terraform/;terraform show -no-color tfplan > tfplan.txt"                
+            sh "pwd;cd ${work_space}/terraform/;terraform init"
+            sh "pwd;cd ${work_space}/terraform/;terraform plan -out tfplan"  
+            sh "pwd;cd ${work_space}/terraform/;terraform show -no-color tfplan > tfplan.txt"                
           }
         }
     }
