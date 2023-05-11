@@ -1,5 +1,6 @@
 def site_deployment_url = "git@github.com:AvishkaSooriyapperuma/Portfolio.git";
 def inframaintainance_repo = "git@github.com:AvishkaSooriyapperuma/EC2_creation_tf.git";
+def terraform_dir = "Site_deployment/terraform"
 
 pipeline {
   agent any
@@ -12,6 +13,8 @@ pipeline {
   environment {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
     id_rsa_key = "/home/ec2-user/.ssh/idrsa.pub"
+    AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
   }
   parameters {
     string(name: 'pipeline_branch', defaultValue: 'main', description: 'github repo branch');
@@ -32,6 +35,17 @@ pipeline {
                 ])
           }     
           }
+
+    stage('Create an EC2 instance') {
+        steps{
+          sh script """
+          cd ${terraform_dir}
+          terraform init
+          terraform plan
+          terraform apply
+          """
+        }
+    }
   }
 
 //   post {
