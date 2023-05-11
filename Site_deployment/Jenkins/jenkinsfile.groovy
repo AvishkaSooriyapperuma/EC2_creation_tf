@@ -26,6 +26,7 @@ pipeline {
         // main repo will be checkedout here and from it we take the tf
             //git credentialsId: 'github', url:"https://github.com/AvishkaSooriyapperuma/EC2_creation_tf.git"
           steps{
+            dir(terraform){
                 checkout([
                     $class: 'GitSCM',
                     branches: [[name: 'main']],
@@ -34,6 +35,7 @@ pipeline {
                         credentialsId: 'github_pat'
                     ]]
                 ])
+            }
           }     
           }
 
@@ -42,7 +44,7 @@ pipeline {
           script{
             sh "pwd;cd terraform;terraform init"
             sh "pwd;cd terraform;terraform plan -out tfplan"  
-            sh "pwd;cd terraform; terraform show -no-color tfplan > tfplan.txt"                
+            sh "pwd;cd terraform;terraform show -no-color tfplan > tfplan.txt"                
           }
         }
     }
