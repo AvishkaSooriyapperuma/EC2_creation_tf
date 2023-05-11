@@ -26,8 +26,8 @@ pipeline {
                     $class: 'GitSCM',
                     branches: [[name: 'main']],
                     userRemoteConfigs: [[
-                        url: 'git@github.com:AvishkaSooriyapperuma/EC2_creation_tf.git',
-                        credentialsId: 'github_ssh'
+                        url: 'https://github.com/AvishkaSooriyapperuma/EC2_creation_tf.git',
+                        credentialsId: 'github_pat'
                     ]]
                 ])
           }     
