@@ -19,7 +19,7 @@ pipeline {
   parameters {
     string(name: 'pipeline_branch', defaultValue: 'main', description: 'github repo branch');
     booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically runs the tf apply after generating the plan');
-    choice('sleep', ['yes', 'no'], 'Sleep?:')
+    choice(name: 'sleep', choices: ['yes', 'no'], description: 'Sleep?:')
   }
 
   stages {
