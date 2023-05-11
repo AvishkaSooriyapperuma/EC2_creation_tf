@@ -18,6 +18,8 @@ pipeline {
   }
   parameters {
     string(name: 'pipeline_branch', defaultValue: 'main', description: 'github repo branch');
+    booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically runs the tf apply after generating the plan');
+    choiceParam('sleep', ['yes', 'no'], 'Sleep?:')
   }
 
   stages {
@@ -36,16 +38,54 @@ pipeline {
           }     
           }
 
-    stage('Create an EC2 instance') {
+    stage('initialize and plan terraform') {
         steps{
           sh script """
+          pwd
           cd ${terraform_dir}
           terraform init
-          terraform plan
-          terraform apply
+          terraform plan -out tfplan
+          terraform show -no-color tfplan > tfplan.txt
           """
         }
     }
+
+    stage('Terraform approve before apply'){
+      when {
+        not {
+          equals expected: true, actual: params.autoApprove
+        }
+      }
+      steps{
+        script{
+          def plan = readFile '${terraform_dir}/tfplan.txt'
+          input message: "Do you want to apply the plan?",
+          parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue:plan)]
+        }
+      }
+    }
+
+    stage('Terraform apply'){
+      steps{
+        sh "pwd;cd Site_deployment/terraform; terraform apply -input=false tfplan"
+      }
+    }
+
+    stage('Example Stage') {
+      when {expression { params.sleep == 'yes' }}
+        steps {
+            echo 'This is an example step'
+            input message: 'Press OK to continue', ok: 'OK'
+            echo 'Continuing with the pipeline execution'
+        }
+    }
+
+    stage('Terraform destroy'){
+      steps{
+        sh "pwd;cd Site_deployment/terraform; terraform destroy -input=false tfplan"
+      }
+    }
+
   }
 
 //   post {
