@@ -42,16 +42,16 @@ pipeline {
     stage('initialize and plan terraform') {
         steps{
           script{
-            sh script '''
-            pwd;
-            cd ${work_space}/terraform/;
-            terraform init
-            terraform plan -out tfplan
-            terraform show -no-color tfplan > tfplan.txt
-            '''
-            // sh 'pwd;cd ${work_space}/terraform/;terraform init'
-            // sh "pwd;cd ${work_space}/terraform/;terraform plan -out tfplan"  
-            // sh "pwd;cd ${work_space}/terraform/;terraform show -no-color tfplan > tfplan.txt"                
+            // sh script '''
+            // pwd;
+            // cd ${work_space}/terraform/;
+            // terraform init
+            // terraform plan -out tfplan
+            // terraform show -no-color tfplan > tfplan.txt
+            // '''
+            sh 'pwd;cd ${work_space}/terraform/;terraform init'
+            sh "pwd;cd ${work_space}/terraform/;terraform plan -out tfplan"  
+            sh "pwd;cd ${work_space}/terraform/;terraform show -no-color tfplan > tfplan.txt"                
           }
         }
     }
