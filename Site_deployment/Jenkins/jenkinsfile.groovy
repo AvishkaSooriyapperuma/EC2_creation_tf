@@ -27,7 +27,7 @@ pipeline {
                     branches: [[name: 'main']],
                     userRemoteConfigs: [[
                         url: 'git@github.com:AvishkaSooriyapperuma/EC2_creation_tf.git',
-                        credentialsId: 'github'
+                        credentialsId: 'github_ssh'
                     ]]
                 ])
           }
