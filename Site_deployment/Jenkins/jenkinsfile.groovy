@@ -13,7 +13,7 @@ pipeline {
 
   environment {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
-    ENV PATH="${PATH}:/usr/bin/terraform"
+    PATH="${PATH}:/usr/bin/terraform"
     AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
   }
