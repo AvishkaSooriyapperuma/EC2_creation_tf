@@ -13,6 +13,7 @@ pipeline {
 
   environment {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
+    ENV PATH="${PATH}:/usr/bin/terraform"
     AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
   }
@@ -41,9 +42,16 @@ pipeline {
     stage('initialize and plan terraform') {
         steps{
           script{
-            sh 'pwd;cd ${work_space}/terraform/;terraform init'
-            sh "pwd;cd ${work_space}/terraform/;terraform plan -out tfplan"  
-            sh "pwd;cd ${work_space}/terraform/;terraform show -no-color tfplan > tfplan.txt"                
+            sh script '''
+            pwd;
+            cd ${work_space}/terraform/;
+            terraform init
+            terraform plan -out tfplan
+            terraform show -no-color tfplan > tfplan.txt
+            '''
+            // sh 'pwd;cd ${work_space}/terraform/;terraform init'
+            // sh "pwd;cd ${work_space}/terraform/;terraform plan -out tfplan"  
+            // sh "pwd;cd ${work_space}/terraform/;terraform show -no-color tfplan > tfplan.txt"                
           }
         }
     }
