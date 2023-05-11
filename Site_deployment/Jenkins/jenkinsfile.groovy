@@ -1,6 +1,7 @@
 def site_deployment_url = "git@github.com:AvishkaSooriyapperuma/Portfolio.git";
 def inframaintainance_repo = "git@github.com:AvishkaSooriyapperuma/EC2_creation_tf.git";
 def terraform_dir = "Site_deployment/terraform"
+def work_space = "/var/jenkins_home/workspace/Site_deployment"
 
 pipeline {
   agent any
@@ -42,7 +43,7 @@ pipeline {
     stage('initialize and plan terraform') {
         steps{
           script{
-            sh "pwd;cd terraform/;terraform init"
+            sh "pwd;cd ${work_space}/terraform/;terraform init"
             sh "pwd;cd terraform/;terraform plan -out tfplan"  
             sh "pwd;cd terraform/;terraform show -no-color tfplan > tfplan.txt"                
           }
