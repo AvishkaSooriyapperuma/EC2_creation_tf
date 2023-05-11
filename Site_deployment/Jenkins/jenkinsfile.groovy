@@ -71,10 +71,9 @@ pipeline {
       }
     }
 
-    stage('Example Stage') {
+    stage('Sleep') {
       when {expression { params.sleep == 'yes' }}
         steps {
-            echo 'This is an example step'
             input message: 'Press OK to continue', ok: 'OK'
             echo 'Continuing with the pipeline execution'
         }
