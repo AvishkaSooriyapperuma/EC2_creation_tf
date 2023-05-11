@@ -19,7 +19,7 @@ pipeline {
   parameters {
     string(name: 'pipeline_branch', defaultValue: 'main', description: 'github repo branch');
     booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically runs the tf apply after generating the plan');
-    choiceParam('sleep', ['yes', 'no'], 'Sleep?:')
+    choice('sleep', ['yes', 'no'], 'Sleep?:')
   }
 
   stages {
@@ -40,13 +40,15 @@ pipeline {
 
     stage('initialize and plan terraform') {
         steps{
-          sh script """
-          pwd
-          cd ${terraform_dir}
-          terraform init
-          terraform plan -out tfplan
-          terraform show -no-color tfplan > tfplan.txt
-          """
+          script{
+            sh script """
+              pwd
+              cd ${terraform_dir}
+              terraform init
+              terraform plan -out tfplan
+              terraform show -no-color tfplan > tfplan.txt
+              """
+          }
         }
     }
 
