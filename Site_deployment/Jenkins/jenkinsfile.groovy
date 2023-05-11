@@ -12,7 +12,6 @@ pipeline {
 
   environment {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
-    id_rsa_key = "/home/ec2-user/.ssh/idrsa.pub"
     AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
   }
@@ -41,13 +40,9 @@ pipeline {
     stage('initialize and plan terraform') {
         steps{
           script{
-            sh script """
-              pwd
-              cd ${terraform_dir}
-              terraform init
-              terraform plan -out tfplan
-              terraform show -no-color tfplan > tfplan.txt
-              """
+            sh "pwd;cd ${terraform_dir};terraform init"
+            sh "pwd;cd ${terraform_dir};terraform plan -out tfplan"  
+            sh "pwd;cd Site_deployment/terraform; terraform show -no-color tfplan > tfplan.txt"                
           }
         }
     }
