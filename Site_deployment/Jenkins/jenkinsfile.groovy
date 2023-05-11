@@ -40,9 +40,9 @@ pipeline {
     stage('initialize and plan terraform') {
         steps{
           script{
-            sh "pwd;cd ${terraform_dir};terraform init"
-            sh "pwd;cd ${terraform_dir};terraform plan -out tfplan"  
-            sh "pwd;cd Site_deployment/terraform; terraform show -no-color tfplan > tfplan.txt"                
+            sh "pwd;cd terraform;terraform init"
+            sh "pwd;cd terraform;terraform plan -out tfplan"  
+            sh "pwd;cd terraform; terraform show -no-color tfplan > tfplan.txt"                
           }
         }
     }
@@ -64,7 +64,7 @@ pipeline {
 
     stage('Terraform apply'){
       steps{
-        sh "pwd;cd Site_deployment/terraform; terraform apply -input=false tfplan"
+        sh "pwd;cd terraform; terraform apply -input=false tfplan"
       }
     }
 
@@ -78,7 +78,7 @@ pipeline {
 
     stage('Terraform destroy'){
       steps{
-        sh "pwd;cd Site_deployment/terraform; terraform destroy -input=false tfplan"
+        sh "pwd;cd terraform; terraform destroy -input=false tfplan"
       }
     }
 
