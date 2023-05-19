@@ -49,9 +49,9 @@ pipeline {
             // terraform plan -out tfplan
             // terraform show -no-color tfplan > tfplan.txt
             // '''
-            sh 'pwd;cd ${work_space}/terraform/;terraform init'
-            sh "pwd;cd ${work_space}/terraform/;terraform plan -out tfplan"  
-            sh "pwd;cd ${work_space}/terraform/;terraform show -no-color tfplan > tfplan.txt"                
+            sh 'pwd;cd ${work_space}/Site_deployment/terraform/;terraform init'
+            sh "pwd;cd ${work_space}/Site_deployment/terraform/;terraform plan -out tfplan"  
+            sh "pwd;cd ${work_space}/Site_deployment/terraform/;terraform show -no-color tfplan > tfplan.txt"                
           }
         }
     }
