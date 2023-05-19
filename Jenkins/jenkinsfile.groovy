@@ -39,15 +39,14 @@ pipeline {
           }     
           }
 
-    stage('install terraform'){
-      steps{
-        script{
-                sh 'sudo apt update;sudo apt install wget'
-                sh 'wget https://releases.hashicorp.com/terraform/0.15.4/terraform_0.15.4_linux_amd64.zip;unzip terraform_0.15.4_linux_amd64.zip -d /usr/local/bin/'
-                sh "terraform version"
-        }
-      }
-    } 
+    // stage('install terraform'){
+    //   steps{
+    //     script{
+    //             sh 'wget https://releases.hashicorp.com/terraform/0.15.4/terraform_0.15.4_linux_amd64.zip;unzip terraform_0.15.4_linux_amd64.zip -d /usr/local/bin/'
+    //             sh "terraform version"
+    //     }
+    //   }
+    // } 
 
     stage('initialize and plan terraform') {
         steps{
