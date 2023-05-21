@@ -97,10 +97,9 @@ pipeline {
       steps{
         script{
 
-          sh script'''
-          cd /var/jenkins_home/workspace/Site_deployment/Jenkins/ansible
-          ansible-playbook setup_nginx.yml -i /var/jenkins_home/workspace/Site_deployment/ansible/inventory
-          '''
+          sh 'cd /var/jenkins_home/workspace/Site_deployment/Jenkins/ansible'
+          sh 'ansible-playbook setup_nginx.yml -i /var/jenkins_home/workspace/Site_deployment/ansible/inventory'
+          
         }
       }
     }
