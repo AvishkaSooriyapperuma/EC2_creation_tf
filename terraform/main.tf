@@ -3,8 +3,9 @@ provider "aws" {
 }
 
 resource "aws_instance" "ec2_ins" {
-    ami = "ami-0a6351192ce04d50c"
-    instance_type = "t2.micro"
+    ami           = "ami-0874ff0d73a3ab8cf"
+    instance_type = "t3.micro"
+    
     tags = {
         "Name" = "Creativ_hub_assignment_ec2"
         "instance_type" = "t2.micro"
