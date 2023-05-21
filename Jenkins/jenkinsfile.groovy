@@ -98,7 +98,7 @@ pipeline {
         script{
 
           sh 'cd /var/jenkins_home/workspace/Site_deployment/ansible'
-          sh 'ansible-playbook setup_nginx.yml -i /var/jenkins_home/workspace/Site_deployment/ansible/inventory'
+          sh 'ansible-playbook --syntax-check setup_nginx.yml -i /var/jenkins_home/workspace/Site_deployment/ansible/inventory'
           
         }
       }
@@ -108,12 +108,12 @@ pipeline {
 
   post {
     always{
-      sh "pwd;cd terraform/; terraform destroy -var 'Name=Creative_hub_assingment_ec2'"
+      sh "pwd;cd terraform/; terraform destroy -auto-approve -var 'Name=Creative_hub_assingment_ec2'"
     }
     success{
       echo 'Plan executed sucessfully.'
       input message: 'Press OK to continue', ok: 'OK'
-      sh "pwd;cd terraform/; terraform destroy -var 'Name=Creative_hub_assingment_ec2'"
+      sh "pwd;cd terraform/; terraform destroy -auto-approve -var 'Name=Creative_hub_assingment_ec2'"
     }
   }
 }
