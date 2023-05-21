@@ -81,7 +81,7 @@ pipeline {
 
     stage('Terraform apply'){
       steps{
-        sh "pwd;cd terraform/; terraform apply -input=false tfplan"
+        sh "pwd;cd terraform/; terraform apply -input=false tfplan -var 'Name=Creativ_hub_assignment_ec2'"
       }
     }
 
