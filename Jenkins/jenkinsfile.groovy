@@ -1,7 +1,6 @@
 def site_deployment_url = "git@github.com:AvishkaSooriyapperuma/Portfolio.git";
 def inframaintainance_repo = "git@github.com:AvishkaSooriyapperuma/EC2_creation_tf.git";
-def terraform_dir = "Site_deployment/terraform"
-def work_space = "/var/jenkins_home/workspace/Site_deployment"
+
 
 pipeline {
   agent any
@@ -92,6 +91,18 @@ pipeline {
             input message: 'Press OK to continue', ok: 'OK'
             echo 'Continuing with the pipeline execution'
         }
+    }
+
+    stage('Setup Nginx'){
+      steps{
+        script{
+
+          sh script'''
+          cd /var/jenkins_home/workspace/Site_deployment/Jenkins/ansible
+          ansible-playbook setup_nginx.yml -i /var/jenkins_home/workspace/Site_deployment/ansible/inventory
+          '''
+        }
+      }
     }
 
     stage('Terraform destroy'){
