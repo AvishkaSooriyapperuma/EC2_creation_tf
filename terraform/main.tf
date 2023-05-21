@@ -5,6 +5,7 @@ provider "aws" {
 resource "aws_instance" "ec2_ins" {
     ami           = "ami-0874ff0d73a3ab8cf"
     instance_type = "t3.micro"
+    key_name      = aws_key_pair.mykey.key_name
     
     tags = {
         Name = var.Name
@@ -12,6 +13,10 @@ resource "aws_instance" "ec2_ins" {
     }
 }
 
+resource "aws_key_pair" "mykey" {
+  key_name   = "mykey"
+  public_key = file("mykey.pub")
+}
 
 variable "Name" {
   description = "Creative_hub_assingment_ec2"
