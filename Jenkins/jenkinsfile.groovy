@@ -100,8 +100,7 @@ pipeline {
       steps{
         script{
 
-          sh 'cd /var/jenkins_home/workspace/Site_deployment/ansible'
-          sh 'ansible-playbook -i inventory setup_nginx.yml '
+          sh 'pwd;cd /var/jenkins_home/workspace/Site_deployment/ansible/;ansible-playbook -i inventory setup_nginx.yml '
           
         }
       }
