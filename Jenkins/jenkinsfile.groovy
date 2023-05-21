@@ -112,12 +112,14 @@ pipeline {
 
   }
 
-//   post {
-//     failure {
-//       // notify users when the Pipeline fails
-//       mail to: 'team@example.com',
-//           subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-//           body: "Something is wrong with ${env.BUILD_URL}"
-//     }
-//   }
+  post {
+    always{
+      sh "pwd;cd terraform/; terraform destroy -input=false tfplan"
+    }
+    success{
+      echo 'Plan executed sucessfully.'
+      input message: 'Press OK to continue', ok: 'OK'
+      sh "pwd;cd terraform/; terraform destroy -input=false tfplan"
+    }
+  }
 }
