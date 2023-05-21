@@ -7,9 +7,13 @@ resource "aws_instance" "ec2_ins" {
     instance_type = "t3.micro"
     
     tags = {
-        "Name" = "Creativ_hub_assignment_ec2"
+        Name = var.Name
         "instance_type" = "t2.micro"
     }
 }
 
 
+variable "Name" {
+  description = "Creative_hub_assingment_ec2"
+  type        = string
+}
