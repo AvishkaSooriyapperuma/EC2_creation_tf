@@ -81,9 +81,11 @@ pipeline {
 
     stage('Terraform apply'){
       steps{
-        sh "pwd;cd terraform/; terraform apply -input=false tfplan"
-        sh "sleep time: 60, unit: 'SECONDS'"
-      }
+        script{
+          sh "pwd;cd terraform/; terraform apply -input=false tfplan"
+          sleep time: 60, unit: 'SECONDS'
+        }
+      }     
     }
 
     stage('Sleep') {
