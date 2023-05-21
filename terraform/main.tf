@@ -16,4 +16,5 @@ resource "aws_instance" "ec2_ins" {
 variable "Name" {
   description = "Creative_hub_assingment_ec2"
   type        = string
+  default     = "Creative_hub_assingment_ec2"
 }
