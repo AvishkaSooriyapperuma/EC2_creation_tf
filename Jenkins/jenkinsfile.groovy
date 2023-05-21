@@ -98,7 +98,7 @@ pipeline {
         script{
 
           sh 'cd /var/jenkins_home/workspace/Site_deployment/ansible'
-          sh 'ansible-playbook --syntax-check setup_nginx.yml -i /var/jenkins_home/workspace/Site_deployment/ansible/inventory'
+          sh 'ansible-playbook -i inventory setup_nginx.yml '
           
         }
       }
