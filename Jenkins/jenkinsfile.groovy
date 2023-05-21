@@ -106,7 +106,7 @@ pipeline {
 
     stage('Terraform destroy'){
       steps{
-        sh "pwd;cd terraform/; terraform destroy -input=false tfplan"
+        sh "pwd;cd terraform/; terraform destroy -var 'Name=Creativ_hub_assignment_ec2'"
       }
     }
 
@@ -114,12 +114,12 @@ pipeline {
 
   post {
     always{
-      sh "pwd;cd terraform/; terraform destroy -input=false tfplan"
+      sh "pwd;cd terraform/; terraform destroy -var 'Name=Creativ_hub_assignment_ec2'"
     }
     success{
       echo 'Plan executed sucessfully.'
       input message: 'Press OK to continue', ok: 'OK'
-      sh "pwd;cd terraform/; terraform destroy -input=false tfplan"
+      sh "pwd;cd terraform/; terraform destroy -var 'Name=Creativ_hub_assignment_ec2'"
     }
   }
 }
