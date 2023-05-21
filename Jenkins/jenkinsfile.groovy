@@ -97,7 +97,7 @@ pipeline {
       steps{
         script{
 
-          sh 'cd /var/jenkins_home/workspace/Site_deployment/Jenkins/ansible'
+          sh 'cd /var/jenkins_home/workspace/Site_deployment/ansible'
           sh 'ansible-playbook setup_nginx.yml -i /var/jenkins_home/workspace/Site_deployment/ansible/inventory'
           
         }
