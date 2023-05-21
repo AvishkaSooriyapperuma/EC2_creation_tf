@@ -104,12 +104,6 @@ pipeline {
       }
     }
 
-    stage('Terraform destroy'){
-      steps{
-        sh "pwd;cd terraform/; terraform destroy -var 'Name=Creativ_hub_assignment_ec2'"
-      }
-    }
-
   }
 
   post {
