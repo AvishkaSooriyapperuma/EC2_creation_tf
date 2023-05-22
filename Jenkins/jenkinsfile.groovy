@@ -3,7 +3,12 @@ def inframaintainance_repo = "git@github.com:AvishkaSooriyapperuma/EC2_creation_
 
 
 pipeline {
-  agent any
+  agent{
+    docker {
+      image 'jenkins-with-tf'
+      args '-v /home/avishka/jenkins_home/.ssh:/var/jenkins_home/.ssh'
+    }
+  }
 
   // using the Timestamper plugin we can add timestamps to the console log
   options {
@@ -100,7 +105,7 @@ pipeline {
       steps{
         script{
 
-          sh "pwd;cd /var/jenkins_home/workspace/Site_deployment/ansible/;ansible-playbook -i inventory setup_nginx.yml --private-key= ../rsa/mykey --user=ec2-user"
+          sh "pwd;cd /var/jenkins_home/workspace/Site_deployment/ansible/;ansible-playbook -i inventory setup_nginx.yml"
           
         }
       }
