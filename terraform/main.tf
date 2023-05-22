@@ -15,7 +15,7 @@ resource "aws_instance" "ec2_ins" {
 
 resource "aws_key_pair" "mykey" {
   key_name   = "mykey"
-  public_key = file("/var/jenkins_home/workspace/Site_deployment/rsa/mykey.pem")
+  public_key = file("/var/jenkins_home/workspace/Site_deployment/rsa/mykey.pub")
 }
 
 variable "Name" {
