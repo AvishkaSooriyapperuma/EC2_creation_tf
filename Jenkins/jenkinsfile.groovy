@@ -3,12 +3,7 @@ def inframaintainance_repo = "git@github.com:AvishkaSooriyapperuma/EC2_creation_
 
 
 pipeline {
-  agent{
-    docker {
-      image 'jenkins-with-tf'
-      args '-v /home/avishka/jenkins_home/.ssh:/var/jenkins_home/.ssh'
-    }
-  }
+  agent any
 
   // using the Timestamper plugin we can add timestamps to the console log
   options {
