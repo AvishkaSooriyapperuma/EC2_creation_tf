@@ -100,11 +100,14 @@ pipeline {
       steps{
         script{
 
-          sh "pwd;cd /var/jenkins_home/workspace/Site_deployment/ansible/;ansible-playbook credentialsId: 'ansible',disableHostKeyChecking: true, -i inventory setup_nginx.yml "
+          sh "pwd;cd /var/jenkins_home/workspace/Site_deployment/ansible/;ansible-playbook -i inventory setup_nginx.yml --private-key= ../rsa/mykey"
           
         }
       }
     }
+
+
+
 
   }
 
