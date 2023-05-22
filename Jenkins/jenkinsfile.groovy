@@ -100,7 +100,7 @@ pipeline {
       steps{
         script{
 
-          sh "pwd;cd /var/jenkins_home/workspace/Site_deployment/ansible/;ansible-playbook -i inventory setup_nginx.yml --private-key= ../rsa/mykey"
+          sh "pwd;cd /var/jenkins_home/workspace/Site_deployment/ansible/;ansible-playbook -i inventory setup_nginx.yml --private-key= ../rsa/mykey --user=ec2-user"
           
         }
       }
