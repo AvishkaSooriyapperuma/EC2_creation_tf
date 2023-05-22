@@ -13,6 +13,7 @@ pipeline {
   environment {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
     PATH="${PATH}:/usr/bin/terraform"
+    rsa_key="/home/avishka/jenkins_home/.ssh/mykey.pub:/var/jenkins_home/.ssh"
     AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
   }
@@ -113,12 +114,12 @@ pipeline {
 
   post {
     always{
-      sh "pwd;cd terraform/; terraform destroy -auto-approve -var 'Name=Creative_hub_assingment_ec2'"
+      sh "pwd;cd terraform/; terraform destroy -auto-approve -var 'Name=creative_hub_assingment_ec2'"
     }
     success{
       echo 'Plan executed sucessfully.'
       input message: 'Press OK to continue', ok: 'OK'
-      sh "pwd;cd terraform/; terraform destroy -auto-approve -var 'Name=Creative_hub_assingment_ec2'"
+      sh "pwd;cd terraform/; terraform destroy -auto-approve -var 'Name=creative_hub_assingment_ec2'"
     }
   }
 }

@@ -19,7 +19,7 @@ resource "aws_key_pair" "mykey" {
 }
 
 variable "Name" {
-  description = "Creative_hub_assingment_ec2"
+  description = "creative_hub_assingment_ec2"
   type        = string
-  default     = "Creative_hub_assingment_ec2"
+  default     = "creative_hub_assingment_ec2"
 }
