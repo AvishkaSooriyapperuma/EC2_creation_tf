@@ -1,6 +1,6 @@
 ---
 - name: Install Nginx
-  hosts: web
+  hosts: ec2
   become: yes
   tasks:
     - name: Install Nginx

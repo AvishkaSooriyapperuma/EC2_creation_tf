@@ -100,7 +100,7 @@ pipeline {
 
     stage('Setup Nginx') {
       steps {
-      withCredentials([sshUserPrivateKey(credentialsId: 'ansible', keyFileVariable: 'ansible', passphraseVariable: '', usernameVariable: 'creative_hub_assingment_ec2')]) {
+      withCredentials([sshUserPrivateKey(credentialsId: 'ansible', keyFileVariable: 'ansible', passphraseVariable: '', usernameVariable: 'ec2-user')]) {
       sh "pwd;cd /var/jenkins_home/workspace/Site_deployment/ansible/;ansible-playbook -i inventory setup_nginx.yml --private-key=${SSH_KEY_FILE} --user=ec2-user"
     }
   }
