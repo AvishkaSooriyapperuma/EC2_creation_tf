@@ -1,5 +1,6 @@
 def site_deployment_url = "git@github.com:AvishkaSooriyapperuma/Portfolio.git";
 def inframaintainance_repo = "git@github.com:AvishkaSooriyapperuma/EC2_creation_tf.git";
+SSH_KEY_FILE = "/var/jenkins_home/workspace/Site_deployment/rsa/mykey.pub"
 
 
 pipeline {
@@ -97,15 +98,24 @@ pipeline {
         }
     }
 
-    stage('Setup Nginx'){
-      steps{
-        script{
-
-          sh "pwd;cd /var/jenkins_home/workspace/Site_deployment/ansible/;ansible-playbook setup_nginx.yml -i inventory --private-key='/var/jenkins_home/workspace/Site_deployment/rsa/mykey.pub'"
-          
-        }
-      }
+    stage('Run Ansible Playbook') {
+      steps {
+      withCredentials([sshUserPrivateKey(credentialsId: 'ansible', keyFileVariable: 'SSH_KEY_FILE', passphraseVariable: '', usernameVariable: 'creative_hub_assingment_ec2')]) {
+      sh "ansible-playbook -i inventory setup_nginx.yml --private-key=${SSH_KEY_FILE} --user=ec2-user"
     }
+  }
+}
+
+
+      // stage('Setup Nginx'){
+      //   steps{
+      //     script{
+
+      //       sh "pwd;cd /var/jenkins_home/workspace/Site_deployment/ansible/;ansible-playbook setup_nginx.yml -i inventory --private-key='/var/jenkins_home/workspace/Site_deployment/rsa/mykey.pub'"
+            
+      //     }
+      //   }
+      // }
 
 
 
