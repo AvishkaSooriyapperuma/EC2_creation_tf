@@ -98,10 +98,10 @@ pipeline {
         }
     }
 
-    stage('Run Ansible Playbook') {
+    stage('Setup Nginx') {
       steps {
-      withCredentials([sshUserPrivateKey(credentialsId: 'ansible', keyFileVariable: 'SSH_KEY_FILE', passphraseVariable: '', usernameVariable: 'creative_hub_assingment_ec2')]) {
-      sh "ansible-playbook -i inventory setup_nginx.yml --private-key=${SSH_KEY_FILE} --user=ec2-user"
+      withCredentials([sshUserPrivateKey(credentialsId: 'ansible', keyFileVariable: 'ansible', passphraseVariable: '', usernameVariable: 'creative_hub_assingment_ec2')]) {
+      sh "pwd;cd /var/jenkins_home/workspace/Site_deployment/ansible/;ansible-playbook -i inventory setup_nginx.yml --private-key=${SSH_KEY_FILE} --user=ec2-user"
     }
   }
 }
