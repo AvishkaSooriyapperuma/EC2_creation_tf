@@ -7,6 +7,8 @@ resource "aws_instance" "ec2_ins" {
     instance_type = "t3.micro"
     key_name      = aws_key_pair.mykey.key_name
     associate_public_ip_address = false
+
+    depends_on = [aws_eip.example]
     
     tags = {
         Name = var.Name
