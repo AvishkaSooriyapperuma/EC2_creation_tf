@@ -22,9 +22,9 @@ resource "aws_key_pair" "mykey" {
 }
 
 variable "Name" {
-  description = "creative_hub_assingment_ec2"
+  description = "Test project"
   type        = string
-  default     = "creative_hub_assingment_ec2"
+  default     = "Test project"
 }
 
 resource "aws_eip" "eip_ec2" {
