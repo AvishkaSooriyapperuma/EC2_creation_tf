@@ -3,12 +3,12 @@
   hosts: ec2
   become: yes
   tasks:
-    - name: Install Nginx
+    - name: Install Nginx on Remote EC2
       yum:
         name: nginx
         state: present
 
-    - name: Start Nginx
+    - name: Start Nginx 
       service:
         name: nginx
         state: started
