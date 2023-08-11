@@ -1,5 +1,5 @@
-def site_deployment_url = "git@github.com:AvishkaSooriyapperuma/Portfolio.git";
-def inframaintainance_repo = "git@github.com:AvishkaSooriyapperuma/EC2_creation_tf.git";
+//def site_deployment_url = "git@github.com:AvishkaSooriyapperuma/Portfolio.git";
+//def inframaintainance_repo = "git@github.com:AvishkaSooriyapperuma/EC2_creation_tf.git";
 SSH_KEY_FILE = "/var/jenkins_home/workspace/Site_deployment/rsa/mykey.pub"
 
 
